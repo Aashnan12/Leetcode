@@ -5,6 +5,7 @@ public:
         for(int i:nums){
             sum += i;
         }
-        return (nums.size()*(nums.size()+1))/2-sum;
+        int n = nums.size();
+        return (n*(n+1))/2-sum;
     }
 };
