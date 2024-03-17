@@ -21,10 +21,13 @@ public:
 
         result.push_back(newInterval);
 
+        // Step 3 -> Add rest of intervals greater than uper bound of newintervals.
+
         while(i<intervals.size()){
             result.push_back(intervals[i]);
             i++;
         }
+        
         return result;
     }
 };
