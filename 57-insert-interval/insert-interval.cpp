@@ -1,33 +1,30 @@
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+    vector<vector<int>> insert(vector<vector<int>>& arr, vector<int>& nums) {
         
-        // Step 1 -> Push intervals before new interval to result array
-
+        // Push Intervals Lesser than starting of newInterval
         vector<vector<int>> result;
-        int i=0;
-        while(i<intervals.size() && intervals[i][1] < newInterval[0]){
-            result.push_back(intervals[i]);
-            i++;
-        }
-
-        // Step 2 -> Add the overlapping Interval
-
-        while(i<intervals.size() && intervals[i][0] <= newInterval[1]) {
-            newInterval[0] = min(newInterval[0],intervals[i][0]);
-            newInterval[1] = max(newInterval[1],intervals[i][1]);
-            i++;
-        }
-
-        result.push_back(newInterval);
-
-        // Step 3 -> Add rest of intervals greater than uper bound of newintervals.
-
-        while(i<intervals.size()){
-            result.push_back(intervals[i]);
+        int n = arr.size();
+        int i = 0;
+        while(i<n && arr[i][1] < nums[0]){
+            result.push_back(arr[i]);
             i++;
         }
         
+        // Merge Intervals
+        while(i<n && arr[i][0] <= nums[1]){
+            nums[0] = min(arr[i][0],nums[0]);
+            nums[1] = max(arr[i][1],nums[1]);
+            i++;
+        }
+        result.push_back(nums);
+
+        // Now Push_back rest of intervals
+
+        while(i<n){
+            result.push_back(arr[i]);
+            i++;
+        }
         return result;
     }
 };
