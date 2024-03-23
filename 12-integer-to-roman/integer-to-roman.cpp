@@ -9,6 +9,7 @@ public:
                 ans += roman_map[i];
                 num -= key[i];
             }
+            if(num==0)return ans;
         }
         return ans;
     }
