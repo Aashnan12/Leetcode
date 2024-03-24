@@ -11,7 +11,7 @@ public:
             return t[index];
         }
         if(st.find(s) != st.end()){
-            return t[index] = true;
+            return true;
         }
         for(int l=1;l<=n;l++){
             string temp = s.substr(index,l);
