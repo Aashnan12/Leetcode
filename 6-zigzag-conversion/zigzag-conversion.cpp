@@ -1,31 +1,33 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
-        int len = s.length();
-        if(s.size()== numRows || numRows == 1) {
-            return s;
-        }
-        vector<string> vec(numRows);
-        int i = 0,j = 0;
-        string s1 = "";
+        int n = s.size();
+        if(n==numRows || numRows==1) return s;
 
-        while(i < len){
-            while(j < numRows && i < len) {
-                vec[j++] += s[i++];
+        vector<string> zigzag(numRows);
+        int i=0,row=0;
+        int direction = 1;
+
+        while(true){
+            if(direction){
+                while(i<n && row < numRows){
+                    zigzag[row++].push_back(s[i++]);
+                }
+                row = numRows-2;
             }
-            if(j == numRows) {
-                j = numRows - 2;
+            else{
+                while(i<n && row >=0){
+                    zigzag[row--].push_back(s[i++]);
+                }
+                row = 1;
             }
-            while( j >= 0 && i < len) {
-                vec[j--] += s[i++];
-            }
-            if(j == -1) {
-                j = 1;
-            }
+            if(i>=n)break;
+            direction = !direction;
         }
-        for(i = 0; i < numRows ; i++) {
-            s1 += vec[i];
+        string result = "";
+        for(int i=0;i<numRows;i++){
+            result += zigzag[i];
         }
-        return s1;
+        return result;
     }
 };
