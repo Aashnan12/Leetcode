@@ -2,7 +2,7 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         int len = s.length();
-        if(len < 3 || numRows == 1) {
+        if(s.size()== numRows || numRows == 1) {
             return s;
         }
         vector<string> vec(numRows);
