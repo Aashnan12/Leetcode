@@ -6,11 +6,11 @@ public:
         int prod = 1,left = 0,result = 0;
         for(int right = 0; right < nums.size() ; right++){
             prod *= nums[right];
-            while(prod >= k){
+            while(prod >= k && left < nums.size()){
                 prod /= nums[left];
                 left++;
             }
-            result += right-left+1;
+            if(prod < k) result += right-left+1;
         }
         return result;
     }
