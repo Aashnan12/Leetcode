@@ -1,6 +1,6 @@
 class Solution {
 public:
-    static bool mycomp(string a,string b){
+    static bool mycomp(const string &a,const string &b){
         return a+b > b+a;
     }
     string largestNumber(vector<int>& nums) {
