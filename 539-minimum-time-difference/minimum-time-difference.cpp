@@ -2,17 +2,13 @@ class Solution {
 public:
     int findMinDifference(vector<string>& timePoints) {
         vector<int> time;
-        int hour;
-        int min;
+        int x;
         for(auto i : timePoints){
-            hour = stoi(i.substr(0,2));
-            min = stoi(i.substr(3,2));
-            if(hour == 0){
-                time.push_back(1440 + min);
+            x = (stoi(i.substr(0,2))*60 + stoi(i.substr(3,2)));
+            if(x == 0){
+                x = 1440;
             }
-            else {
-                time.push_back(hour*60+min);
-            }
+            time.push_back(x);
         }
         // for(auto i : time){
         //     cout<<i<<" ";
