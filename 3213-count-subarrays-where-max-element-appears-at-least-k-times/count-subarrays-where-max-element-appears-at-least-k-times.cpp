@@ -4,11 +4,10 @@ public:
         int a = *max_element(nums.begin(),nums.end()), n = nums.size(), curr = 0, i = 0;
         long long res = 0;
         for(int j=0;j<n;j++){
-            curr  = curr + (nums[j] == a);
+            curr  += (nums[j] == a);
             while(curr >= k){
-                curr = curr - (nums[i++] == a);
+                curr -= (nums[i++] == a);
             }
-            cout<<i<<" ";
             res += i;
         }
         return res;
