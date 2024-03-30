@@ -1,28 +1,23 @@
 class Solution {
 public:
-    int findMinDifference(vector<string>& timePoints) {
+    int findMinDifference(vector<string>& arr) {
         vector<int> time;
-        int x;
-        for(auto i : timePoints){
-            x = (stoi(i.substr(0,2))*60 + stoi(i.substr(3,2)));
-            if(x == 0){
-                x = 1440;
+        for(auto i : arr){
+            int hour = stoi(i.substr(0,2));
+            int min = stoi(i.substr(3,2));
+            if(hour == 0){
+                time.push_back(1440 + min);
             }
-            time.push_back(x);
+            else{
+                time.push_back(hour*60 + min);
+            }
         }
-        // for(auto i : time){
-        //     cout<<i<<" ";
-        // }
         sort(time.begin(),time.end());
-        // cout<<endl;
-        // for(auto i : time){
-        //     cout<<i<<" ";
-        // }
         int mini = INT_MAX;
         for(int i=1;i<time.size();i++){
-            mini = std::min(mini,time[i] - time[i-1]);
+            mini = min(mini,time[i] - time[i-1]);
         }
-        mini = std::min(mini,1440-(time[time.size()-1] - time[0]));
+        mini = min(mini,1440 - (time[time.size()-1] - time[0]));
         return mini;
     }
 };
