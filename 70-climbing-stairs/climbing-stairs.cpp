@@ -7,6 +7,8 @@ public:
         return dp[n];
     }
     int climbStairs(int n) {
+        // iteration
+
         // if(n==0 || n==1)return 1;
         // int a = 0;
         // int b = 1;
@@ -17,8 +19,14 @@ public:
         //     b = num;
         // }
         // return num;
+
+        // Recursion
+
         // if(n==0 || n==1) return 1;
         // return climbStairs(n-1) + climbStairs(n-2);
+
+        // Dp
+        
         vector<int> dp(n+1,-1);
         return solve(n,dp);
     }
