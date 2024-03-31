@@ -1,12 +1,8 @@
 class Solution {
 public:
     int strStr(string haystack, string needle) {
-        // int pos = haystack.find(needle);
-        // return (pos == -1)?-1:pos;
-
         int m = haystack.size();
         int n = needle.size();
-
         for(int i=0;i<=m-n;i++){
             for(int j=0;j<n;j++){
                 if(needle[j] != haystack[i+j]) break;
@@ -14,5 +10,6 @@ public:
             }
         }
         return -1;
+        
     }
 };
