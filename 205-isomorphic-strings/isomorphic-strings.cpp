@@ -19,6 +19,6 @@ public:
         return ans;
     }
     bool isIsomorphic(string s, string t) {
-        return mapping(s)==mapping(t)?true:false;
+        return mapping(s)==mapping(t);
     }
 };
