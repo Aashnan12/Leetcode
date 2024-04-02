@@ -17,6 +17,6 @@ public:
         return solve(L->left,R->right) && solve(L->right,R->left);
     }
     bool isSymmetric(TreeNode* root) {
-        return !root || solve(root->left,root->right);
+        return solve(root->left,root->right);
     }
 };
