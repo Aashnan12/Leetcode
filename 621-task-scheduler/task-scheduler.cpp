@@ -1,17 +1,15 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        unordered_map<char,int> map;
+        int hash[26] = {0};
         int maxi = INT_MIN;
-        for(int i : tasks){
-            map[i]++;
-            maxi = max(maxi,map[i]);
+        for(char ch : tasks){
+            hash[ch-'A']++;
+            maxi = max(maxi,hash[ch-'A']);
         }
         int ans = (maxi-1)*(n+1);
-        for(auto i : map){
-            if(i.second == maxi){
-                ans++;
-            }
+        for(int i=0;i<26;i++){
+            if(hash[i] == maxi) ans++;
         }
         return max((int)tasks.size(),ans);
     }
