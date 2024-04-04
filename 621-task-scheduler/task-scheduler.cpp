@@ -1,9 +1,9 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        int hash[26] = {0},maxi = INT_MIN,count;
+        int hash[26] = {0},maxi,count;
         for(char &ch : tasks){
-            hash[ch - 'A']++;
+            hash[ch-'A']++;
             maxi = max(maxi,hash[ch-'A']);
         }
         count = (maxi-1)*(n+1);
