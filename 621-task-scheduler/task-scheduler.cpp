@@ -1,16 +1,17 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        int hash[26] = {0};
-        int maxi = INT_MIN;
-        for(char ch : tasks){
-            hash[ch-'A']++;
+        int hash[26] = {0},maxi = INT_MIN,count;
+        for(char &ch : tasks){
+            hash[ch - 'A']++;
             maxi = max(maxi,hash[ch-'A']);
         }
-        int ans = (maxi-1)*(n+1);
+        count = (maxi-1)*(n+1);
         for(int i=0;i<26;i++){
-            if(hash[i] == maxi) ans++;
+            if(hash[i] == maxi){
+                count++;
+            }
         }
-        return max((int)tasks.size(),ans);
+        return max(count,(int)tasks.size());
     }
 };
