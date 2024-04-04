@@ -1,22 +1,20 @@
 class Solution {
 public:
-    bool canPlaceFlowers(vector<int>& arr, int n) {
-        if(arr.size()==1 && arr[0]==0 && n==1) return true;
-        int size = arr.size();
+    bool canPlaceFlowers(vector<int>& A, int n) {
+        int size = A.size();
+        if(size==1 && A[0]==0 && n==1) return true;
         for(int i=0;i<size;i++){
-            if(n<=0){
-                return true;
-            }
-            if(i==0 && i+1<size && arr[i]==0 && arr[i+1]==0){
-                arr[i]=1;
+            if(n<=0)return true;
+            if(i==0 && A[i]==0 && i+1<size && A[i+1]==0){
+                A[i]=1;
                 n--;
             }
-            if(i==size-1 && i>0 && arr[i-1]==0 && arr[i]==0){
-                arr[i]=1;
+            if(i==size-1 && A[i]==0 && i-1>0 && A[i-1]==0){
+                A[i]=1;
                 n--;
             }
-            if(i>0 && i+1<size && arr[i]==0 &&(arr[i-1] ==0 && arr[i+1]==0)){
-                arr[i]=1;
+            if(i>0 && i+1<size && A[i]==0 && A[i-1]==0 && A[i+1]==0){
+                A[i]=1;
                 n--;
             }
         }
