@@ -7,16 +7,14 @@ public:
         int i=0;
         int j=s.size()-1;
         while(i<j){
-            if(!isVowel(s[i])) {
+        if(!isVowel(s[i])) {
             i++;
         }
-        else if(!isVowel(s[j])) {
+        if(!isVowel(s[j])) {
             j--;
         }
-        else{
-            swap(s[i],s[j]);
-            i++;
-            j--;
+        if(isVowel(s[i]) && isVowel(s[j])){
+            swap(s[i++],s[j--]);
         }
     }
     return s;
