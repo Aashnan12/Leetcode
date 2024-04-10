@@ -4,18 +4,16 @@ public:
         sort(A.begin(),A.end());
         int n = A.size();
         vector<int> result(n);
-        deque<int> q;
+        queue<int> q;
         for(int i=0;i<n;i++){
-            q.push_back(i);
+            q.push(i);
         }
-        for(int &card : A){
+        for(int i=0;i<n;i++){
             int idx = q.front();
-            q.pop_front();
-            result[idx] = card;
-            if(!q.empty()){
-                q.push_back(q.front());
-                q.pop_front();
-            }
+            q.pop();
+            q.push(q.front());
+            q.pop();
+            result[idx] = A[i];
         }
         return result;
     }
