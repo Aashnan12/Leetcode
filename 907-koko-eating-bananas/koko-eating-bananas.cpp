@@ -3,7 +3,7 @@ public:
     
     bool solve(vector<int> &piles,int mid,int h){
         int hour=0;
-        for(auto i : piles){
+        for(auto &i : piles){
             hour = hour+i/mid;
             if(i%mid != 0) hour++;
         }
