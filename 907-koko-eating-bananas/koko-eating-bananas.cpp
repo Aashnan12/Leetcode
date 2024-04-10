@@ -7,8 +7,7 @@ public:
             hour = hour+i/mid;
             if(i%mid != 0) hour++;
         }
-        if(hour<=h) return  true;
-        return false;
+        return hour<=h;
     }     
     int minEatingSpeed(vector<int>& piles, int h) {
         int s=1;
