@@ -1,23 +1,29 @@
 class Solution {
 public:
     bool checkValidString(string s) {
-        int cmin=0,cmax=0;
-        for(char &ch : s){
-            if(ch == '('){
-                cmin++;
-                cmax++;
+        stack<int> openstack;
+        stack<int> starstack;
+        for(int i=0;i<s.size();i++){
+            if(s[i] == '('){
+                openstack.push(i);
             }
-            else if(ch == ')'){
-                cmax--;
-                cmin--;
+            else if(s[i] == '*'){
+                starstack.push(i);
             }
             else{
-                cmax++;
-                cmin--;
+                if(!openstack.empty()) openstack.pop();
+                else if(!starstack.empty()) starstack.pop();
+                else return false;
             }
-            if(cmax < 0) return false;
-            cmin = max(cmin,0);
         }
-        return cmin==0;
+        while(!openstack.empty() && !starstack.empty()){
+            if(openstack.top() < starstack.top()){
+                openstack.pop();starstack.pop();
+            }
+            else{
+                return false;
+            }
+        }
+        return openstack.empty();
     }
 };
