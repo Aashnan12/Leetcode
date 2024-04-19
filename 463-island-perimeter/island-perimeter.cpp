@@ -1,43 +1,89 @@
 class Solution {
 public:
     int islandPerimeter(vector<vector<int>>& grid) {
-        int m = grid.size();
-        int n = grid[0].size();
-        int peri = 0;
-        vector<vector<int>> directions {{1,0}, {-1,0},{0,1},{0,-1}};
-        queue<pair<int,int>> q;
+        int m = grid.size(),n = n = grid[0].size(), peri = 0;;
 
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j] == 1){
-                    q.push({i,j});
-                    grid[i][j] = -1;
-
-                    while(!q.empty()){
-                        auto it = q.front();
-                        q.pop();
-                        for(auto &dir : directions){
-                            int x = it.first + dir[0];
-                            int y = it.second + dir[1];
-                            if(x<0 || y<0 || x>=m || y>=n || grid[x][y] == 0){
-                                peri++;
-                            }
-                            else if(grid[x][y] == -1){
-                                continue;
-                            }
-                            else{
-                                q.push({x,y});
-                                grid[x][y] = -1;
-                            }
-                        }
-                    }
-                    return peri;
+                    if(i==0 || grid[i-1][j] == 0) peri++;
+                    if(j==0 || grid[i][j-1] == 0) peri++;
+                    if(i==m-1 || grid[i+1][j] == 0) peri++;
+                    if(j==n-1 || grid[i][j+1] == 0) peri++;
                 }
             }
         }
-        return -1;
+        return peri;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class Solution {
+// public:
+//     int islandPerimeter(vector<vector<int>>& grid) {
+//         int m = grid.size();
+//         int n = grid[0].size();
+//         int peri = 0;
+//         vector<vector<int>> directions {{1,0}, {-1,0},{0,1},{0,-1}};
+//         queue<pair<int,int>> q;
+
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if(grid[i][j] == 1){
+//                     q.push({i,j});
+//                     grid[i][j] = -1;
+
+//                     while(!q.empty()){
+//                         auto it = q.front();
+//                         q.pop();
+//                         for(auto &dir : directions){
+//                             int x = it.first + dir[0];
+//                             int y = it.second + dir[1];
+//                             if(x<0 || y<0 || x>=m || y>=n || grid[x][y] == 0){
+//                                 peri++;
+//                             }
+//                             else if(grid[x][y] == -1){
+//                                 continue;
+//                             }
+//                             else{
+//                                 q.push({x,y});
+//                                 grid[x][y] = -1;
+//                             }
+//                         }
+//                     }
+//                     return peri;
+//                 }
+//             }
+//         }
+//         return -1;
+//     }
+// };
 
 
 
