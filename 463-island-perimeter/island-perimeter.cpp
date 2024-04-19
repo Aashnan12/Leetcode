@@ -1,32 +1,36 @@
 class Solution {
 public:
-    int m,n,peri;
-
-    void dfs(vector<vector<int>>& grid,int i,int j){
-        if(i<0 || j<0 || i>=m  || j>=n || grid[i][j] == 0){
-            peri++;
-            return;
-        }
-        if(grid[i][j] == -1) {
-            return;
-        }
-
-        grid[i][j] = -1;
-
-        dfs(grid,i+1,j); // down
-        dfs(grid,i-1,j); // up
-        dfs(grid,i,j+1); // right
-        dfs(grid,i,j-1); // left
-    }
     int islandPerimeter(vector<vector<int>>& grid) {
-        m = grid.size();
-        n = grid[0].size();
-        peri = 0;
+        int m = grid.size();
+        int n = grid[0].size();
+        int peri = 0;
+        vector<vector<int>> directions {{1,0}, {-1,0},{0,1},{0,-1}};
+        queue<pair<int,int>> q;
 
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j] == 1){
-                    dfs(grid,i,j);
+                    q.push({i,j});
+                    grid[i][j] = -1;
+
+                    while(!q.empty()){
+                        auto it = q.front();
+                        q.pop();
+                        for(auto &dir : directions){
+                            int x = it.first + dir[0];
+                            int y = it.second + dir[1];
+                            if(x<0 || y<0 || x>=m || y>=n || grid[x][y] == 0){
+                                peri++;
+                            }
+                            else if(grid[x][y] == -1){
+                                continue;
+                            }
+                            else{
+                                q.push({x,y});
+                                grid[x][y] = -1;
+                            }
+                        }
+                    }
                     return peri;
                 }
             }
@@ -34,6 +38,66 @@ public:
         return -1;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class Solution {
+// public:
+//     int m,n,peri;
+
+//     void dfs(vector<vector<int>>& grid,int i,int j){
+//         if(i<0 || j<0 || i>=m  || j>=n || grid[i][j] == 0){
+//             peri++;
+//             return;
+//         }
+//         if(grid[i][j] == -1) {
+//             return;
+//         }
+
+//         grid[i][j] = -1;
+
+//         dfs(grid,i+1,j); // down
+//         dfs(grid,i-1,j); // up
+//         dfs(grid,i,j+1); // right
+//         dfs(grid,i,j-1); // left
+//     }
+//     int islandPerimeter(vector<vector<int>>& grid) {
+//         m = grid.size();
+//         n = grid[0].size();
+//         peri = 0;
+
+//         for(int i=0;i<m;i++){
+//             for(int j=0;j<n;j++){
+//                 if(grid[i][j] == 1){
+//                     dfs(grid,i,j);
+//                     return peri;
+//                 }
+//             }
+//         }
+//         return -1;
+//     }
+// };
 
 
 
