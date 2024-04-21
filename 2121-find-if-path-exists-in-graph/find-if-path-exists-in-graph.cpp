@@ -3,21 +3,7 @@ static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.ti
 
 class Solution {
 public:
-    bool dfs(unordered_map<int,vector<int>> &mp,vector<bool> &vis, int src, int des){
-        if(src == des) return true;
-
-        vis[src] = true;
-
-        for(auto &v : mp[src]){
-            if(!vis[v]){
-                if(dfs(mp,vis,v,des)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+    bool validPath(int n, vector<vector<int>>& edges, int src, int destination) {
 
         unordered_map<int,vector<int>> mp;
         for(auto i : edges){
@@ -25,10 +11,23 @@ public:
             mp[i[1]].push_back(i[0]);
         }
         vector<bool> vis(n,false);
+        queue<int> q;
+        q.push(src);
+        
+        while(!q.empty()){
+            int u = q.front();
+            vis[u] = true;
+            q.pop();
+            if(u == destination) return true;
 
-        if(dfs(mp,vis,source,destination)){
-            return true;
+            for(int &v : mp[u]){
+                if(!vis[v]){
+                    vis[v] = true;
+                    q.push(v);
+                }
+            }
         }
+
         return false;
     }
 };
