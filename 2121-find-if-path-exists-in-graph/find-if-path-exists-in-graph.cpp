@@ -1,3 +1,6 @@
+#pragma GCC optimize("Ofast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
 class Solution {
 public:
     bool dfs(unordered_map<int,vector<int>> &mp,vector<bool> &vis, int src, int des){
