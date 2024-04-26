@@ -1,4 +1,6 @@
-#pragma GCC optimize("O3", "unroll-loops")
+#pragma GCC optimize("Ofast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
 class Solution {
 public:
     int minFallingPathSum(vector<vector<int>>& grid) {
