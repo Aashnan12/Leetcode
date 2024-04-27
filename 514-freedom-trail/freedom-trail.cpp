@@ -1,5 +1,12 @@
 #pragma GCC optimize("Ofast")
 static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
 
 class Solution {
 public:
