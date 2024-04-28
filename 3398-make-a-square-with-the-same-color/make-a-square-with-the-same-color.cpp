@@ -26,13 +26,15 @@ public:
         grid[2][1]=='W'?w++:b++;
         if(w >= 3 || b >= 3) return true;
         w=0,b=0;
+
         //Fourth Box
         grid[1][1]=='W'?w++:b++;
         grid[1][2]=='W'?w++:b++;
         grid[2][1]=='W'?w++:b++;
         grid[2][2]=='W'?w++:b++;
         if(w >= 3 || b >= 3) return true;
-
+        w=0,b=0;
+        
         return false; //Not Possible
     }
 };
