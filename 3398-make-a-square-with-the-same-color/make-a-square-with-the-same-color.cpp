@@ -1,3 +1,6 @@
+#pragma GCC optimize("Ofast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
 class Solution {
 public:
     bool canMakeSquare(vector<vector<char>>& grid) {
@@ -34,7 +37,7 @@ public:
         grid[2][2]=='W'?w++:b++;
         if(w >= 3 || b >= 3) return true;
         w=0,b=0;
-        
+
         return false; //Not Possible
     }
 };
