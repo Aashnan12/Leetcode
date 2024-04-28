@@ -1,4 +1,4 @@
-#pragma GCC optimize("O3", "unroll-loops")
+#pragma GCC optimize("ofast")
 class Solution {
 public:
     vector<vector<int>> adj;
