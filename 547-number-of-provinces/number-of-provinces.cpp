@@ -3,14 +3,22 @@ static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.ti
 
 class Solution {
 public:
-    void dfs(unordered_map<int,vector<int>> &map,vector<bool> &vis,int u){
-        vis[u] = true;
-        for(int &v : map[u]){
-            if(!vis[v]){
-                dfs(map,vis,v);
+    void bfs(unordered_map<int,vector<int>> &map,vector<bool> &vis,int src){
+        queue<int> q;
+        q.push(src);
+        vis[src] = true;
+
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+            for(int &v : map[u]){
+                if(!vis[v]){
+                    q.push(v);
+                    vis[v] = true;
+                }
             }
         }
-        return ;
+        return;
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
         unordered_map<int,vector<int>> map;
@@ -29,7 +37,7 @@ public:
         for(int i=0;i<n;i++){
             if(!vis[i]){
                 pro++;
-                dfs(map,vis,i);
+                bfs(map,vis,i);
             }
         }
         return pro;
