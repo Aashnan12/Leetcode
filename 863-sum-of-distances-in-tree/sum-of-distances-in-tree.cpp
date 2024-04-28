@@ -1,4 +1,4 @@
-#pragma GCC optimize("ofast")
+#pragma GCC optimize("Ofast")
 class Solution {
 public:
     vector<vector<int>> adj;
