@@ -1,3 +1,6 @@
+#pragma GCC optimize("Ofast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
@@ -11,7 +14,7 @@ public:
                 i++;
             }
             i++;
-            
+
             while((j<n) && version2[j] != '.'){
                 num2 = num2*10 + (version2[j]-'0');
                 j++;
