@@ -29,6 +29,8 @@ public:
             carry = sum/10;
             sum = 0;
         }
-        return dummy->next;
+        curr = dummy->next;
+        delete dummy;
+        return curr;
     }
 };
