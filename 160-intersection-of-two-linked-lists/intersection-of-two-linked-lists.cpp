@@ -1,3 +1,13 @@
+#pragma GCC optimize("Ofast")
+static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);return 0;}();
+
+
+const int ZERO = []()
+{
+	std::ios_base::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+	return 0;
+}();
 /**
  * Definition for singly-linked list.
  * struct ListNode {
