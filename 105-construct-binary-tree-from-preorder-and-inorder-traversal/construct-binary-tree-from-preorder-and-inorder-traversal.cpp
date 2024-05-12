@@ -16,21 +16,23 @@ static auto _ = [] () {ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.ti
  
 class Solution {
 public:
-    int findpos(vector<int> &inorder,int element,int n){
-        for(int i=0;i<n;i++){
-            if(inorder[i] == element){
-                return i;
-            }
-        }
-        return -1;
-    }
+    // int findpos(vector<int> &inorder,int element,int n){
+    //     for(int i=0;i<n;i++){
+    //         if(inorder[i] == element){
+    //             return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    unordered_map<int,int> mp;
     TreeNode* solve(vector<int>& preorder,vector<int>& inorder,int &index,int instart,int inend,int n){
         if(index >= n || instart > inend){
             return NULL;
         }
         int element = preorder[index++];
         TreeNode* root = new TreeNode(element);
-        int pos = findpos(inorder,element,n);
+        // int pos = findpos(inorder,element,n);
+        int pos = mp[element];
 
         root->left = solve(preorder,inorder,index,instart,pos-1,n);
         root->right = solve(preorder,inorder,index,pos+1,inend,n);
@@ -39,6 +41,9 @@ public:
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int n = preorder.size();
+        for(int i=0;i<n;i++){
+            mp[inorder[i]] = i;
+        }
         int index = 0;
         TreeNode* ans = solve(preorder,inorder,index,0,n-1,n);
         return ans;
