@@ -1,39 +1,31 @@
 class Solution {
 public:
     double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int k) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-        
-        vector<pair<double, int>> ratio;
         int n = quality.size();
-        
-        for (int i = 0; i < n; ++i) {
-                ratio.emplace_back(static_cast<double>(wage[i]) / quality[i], i);
+        vector<pair<double,int>> worker_ratio(n);
+        for(int i=0;i<n;i++){
+            worker_ratio[i] = make_pair( (double)wage[i] / (double)quality[i] , quality[i] );
+        }
+        sort(worker_ratio.begin(),worker_ratio.end());
+        priority_queue<int> pq;
+        int sum = 0;
+        for(int i=0;i<k;i++){
+            pq.push(worker_ratio[i].second); // pushing k qualities
+            sum += worker_ratio[i].second;
+        }
+        double manager_ratio = worker_ratio[k-1].first;
+        double result = manager_ratio * sum;
+
+        for(int i=k;i<n;i++){
+            manager_ratio = worker_ratio[i].first;
+            pq.push(worker_ratio[i].second);
+            sum += worker_ratio[i].second;
+            if(pq.size() > k){
+                sum -= pq.top();
+                pq.pop();
             }
-            
-        sort(begin(ratio), end(ratio));
-        priority_queue<int> maxHeap;
-        int qualitySum = 0;
-        double maxRate = 0.0;
-        
-        for (int i = 0; i < k; ++i) {
-            qualitySum += quality[ratio[i].second];
-            maxRate = max(maxRate, ratio[i].first);
-            maxHeap.push(quality[ratio[i].second]);
+            result = min(result,sum * manager_ratio);
         }
-
-        double res = maxRate * qualitySum;
-        for (int i = k; i < n; ++i) {
-            maxRate = max(maxRate, ratio[i].first);
-            qualitySum -= maxHeap.top(); 
-            maxHeap.pop();
-
-            qualitySum += quality[ratio[i].second];
-            maxHeap.push(quality[ratio[i].second]);
-            res = min(res, maxRate * qualitySum);
-        }
-
-        return res;
+        return result;
     }
 };
