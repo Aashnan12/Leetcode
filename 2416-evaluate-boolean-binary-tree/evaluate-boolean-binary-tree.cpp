@@ -12,7 +12,10 @@
 class Solution {
 public:
     bool solve(TreeNode* root){
-        if(root->val==0 || root->val==1){
+        if(root == NULL){
+            return true;
+        }
+        else if(root->val==0 || root->val==1){
             return root->val == 1;
         }
         else if(root->val==2){
