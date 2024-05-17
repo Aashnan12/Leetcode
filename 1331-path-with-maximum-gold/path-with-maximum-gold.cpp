@@ -11,7 +11,7 @@ const int ZERO = []()
 
 class Solution {
 public:
-    vector<vector<int>> directions {{-1,0}, {1,0} , {0,1},{0,-1}};
+    vector<vector<int>> directions {{-1,0}, {1,0} , {0,-1},{0,1}};
     int dfs(vector<vector<int>> &grid,int i,int j,int m,int n){
         if(i>=m || i<0 || j>=n || j<0 || grid[i][j]==0){
             return 0;
