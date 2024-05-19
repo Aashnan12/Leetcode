@@ -11,20 +11,20 @@
  */
 class Solution {
 public:
-        static int distributeCoins(TreeNode* root, TreeNode* parent= NULL) {
-        if (!root) return 0;
-        int  moves=distributeCoins(root->left, root)+distributeCoins(root->right, root);
-        int x=root->val-1;// give x coins to parent node
-        if (parent) parent->val += x; // now parent's coins
-        moves+=abs(x);
+    int solve(TreeNode* root,int &moves){
+        if(!root){
+            return 0;
+        }
+        int left = solve(root->left,moves);
+        int right = solve(root->right,moves);
+
+        moves += abs(left) + abs(right);
+
+        return left+right+root->val - 1;
+    }
+    int distributeCoins(TreeNode* root) {
+        int moves = 0;
+        solve(root,moves);
         return moves;
     }
 };
-
-
-auto init = []() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    return 'c';
-}();
