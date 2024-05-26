@@ -1,30 +1,42 @@
 class Solution {
 public:
-    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) {
-        vector<int> count(26, 0); 
-        vector<int> lettersCount(26, 0);
-        for(auto &c : letters){
-            count[c - 'a']++;
+    void solve(int i,vector<string>& words, vector<int>& freq, vector<int>& score,int currscore,int n,int &maxscore){
+        maxscore = max(maxscore,currscore);
+        if(i >= n){
+            return;
         }
-        int ans = 0;
-        backtracking(words, score, count, lettersCount, 0, 0, ans);
-        return ans;
+
+        int j=0;
+        int tempscore = 0;
+        vector<int> temp = freq;
+
+        while(j<words[i].size()){
+            char ch = words[i][j];
+            temp[ch - 'a']--;
+            tempscore += score[ch-'a'];
+            if(temp[ch-'a'] < 0){
+                break;
+            }
+            j++;
+        }
+
+        //Take
+        if(j == words[i].size()){
+            solve(i+1,words,temp,score,tempscore + currscore,n,maxscore);
+        }
+
+        // Not take
+        solve(i+1,words,freq,score,currscore,n,maxscore);
+        return;
     }
-    void backtracking(vector<string>& words, vector<int>& score, vector<int>& count, vector<int>& lettersCount, int pos, int temp, int &ans){
-        for(int i = 0; i < 26; i++){
-            if(lettersCount[i] > count[i]) return;
+    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) {
+        vector<int> freq(26,0);
+
+        for(int i=0;i<letters.size();i++){
+            freq[letters[i] - 'a']++;
         }
-        ans = max(ans, temp);
-        for(int i = pos; i < words.size(); i++){
-            for(auto& c : words[i]){
-                lettersCount[c - 'a']++;
-                temp+=score[c - 'a'];
-            }
-            backtracking(words, score, count, lettersCount, i + 1, temp, ans);
-            for(auto& c : words[i]){
-                lettersCount[c - 'a']--;
-                temp-=score[c - 'a'];
-            }
-        }
+        int maxscore = 0;
+        solve(0,words,freq,score,0,words.size(),maxscore);
+        return maxscore;
     }
 };
