@@ -62,7 +62,6 @@ public:
             int v = q.front();
             q.pop();
             courses++;
-
             for(int &u : map[v]){
                 indegree[u]--;
                 if(indegree[u] == 0){
