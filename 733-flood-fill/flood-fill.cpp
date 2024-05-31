@@ -1,26 +1,25 @@
 class Solution {
 public:
     int m,n;
-    void dfs(vector<vector<int>>& image, int i, int j, int startcolor,int color){
-        if(i<0 || j<0 || i>=m || j>=n || image[i][j] != startcolor){
+    void dfs(int i,int j,vector<vector<int>>& mat,int startcolor,int newcolor){
+        if(i<0 || j<0 || i>=m || j>=n || mat[i][j] != startcolor){
             return;
         }
-        image[i][j] = color;
+        mat[i][j] = newcolor;
 
-        dfs(image,i+1,j,startcolor,color);
-        dfs(image,i-1,j,startcolor,color);
-        dfs(image,i,j+1,startcolor,color);
-        dfs(image,i,j-1,startcolor,color);
+        dfs(i+1,j,mat,startcolor,newcolor);
+        dfs(i-1,j,mat,startcolor,newcolor);
+        dfs(i,j+1,mat,startcolor,newcolor);
+        dfs(i,j-1,mat,startcolor,newcolor);
     }
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        m = image.size();
-        n = image[0].size();
+    vector<vector<int>> floodFill(vector<vector<int>>& mat, int sr, int sc, int newcolor) {
+        m = mat.size();
+        n = mat[0].size();
 
-        int startcolor = image[sr][sc];
+        int startcolor = mat[sr][sc];
 
-        if(startcolor != color){
-            dfs(image,sr,sc,startcolor,color);
-        }
-        return image;
+        if(startcolor != newcolor)dfs(sr,sc,mat,startcolor,newcolor);
+
+        return mat;
     }
 };
