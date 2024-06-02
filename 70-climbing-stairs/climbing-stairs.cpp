@@ -1,33 +1,26 @@
 class Solution {
 public:
-    int solve(int n,vector<int> &dp){
-        if(n==0 || n == 1) return 1;
-        if(dp[n] != -1) return dp[n];
-        dp[n] = solve(n-1,dp) + solve(n-2,dp);
-        return dp[n];
+    int dp[46];
+    int solve(int stair,int top){
+        if(stair > top){
+            return 0;
+        }
+        if(dp[stair] != -1) {
+            return dp[stair];
+        }
+        if(stair == top){
+            return 1;
+        }
+        int one_step = solve(stair+1,top);
+        int two_step = solve(stair+2,top);
+        return dp[stair] = one_step + two_step;
     }
     int climbStairs(int n) {
-        // iteration
-
-        // if(n==0 || n==1)return 1;
-        // int a = 0;
-        // int b = 1;
-        // int num = 0;
-        // while(n--){
-        //     num = a + b;
-        //     a = b;
-        //     b = num;
-        // }
-        // return num;
-
-        // Recursion
-
-        // if(n==0 || n==1) return 1;
-        // return climbStairs(n-1) + climbStairs(n-2);
-
-        // Dp
-        
-        vector<int> dp(n+1,-1);
-        return solve(n,dp);
+        memset(dp,-1,sizeof(dp));
+        solve(0,n);
+        for(int i=0;i<=n;i++){
+            cout<<dp[i]<<" ";
+        }
+        return dp[0];
     }
 };
