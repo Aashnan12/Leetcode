@@ -1,21 +1,22 @@
 class Solution {
 public:
-    int trap(vector<int>& height) {
-        int n = height.size(),maxi = INT_MIN;
-        vector<int> LeftMax(n);
-        vector<int> RightMax(n);
+    int trap(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> prefix(n,0);
+        vector<int> suffix(n,0);
+        int maxi = INT_MIN;
         for(int i=0;i<n;i++){
-            LeftMax[i] = max(maxi,height[i]);
-            maxi = max(maxi,height[i]);
+            maxi = max(maxi,arr[i]);
+            prefix[i] = maxi;
         }
         maxi = INT_MIN;
         for(int i=n-1;i>=0;i--){
-            RightMax[i] = max(maxi,height[i]);
-            maxi = max(maxi,height[i]);
+            maxi = max(maxi,arr[i]);
+            suffix[i] = maxi;
         }
         int maxwater = 0;
         for(int i=0;i<n;i++){
-            maxwater += min(LeftMax[i],RightMax[i]) - height[i];
+            maxwater += min(prefix[i],suffix[i]) - arr[i];
         }
         return maxwater;
     }
