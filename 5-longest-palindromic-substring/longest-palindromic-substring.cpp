@@ -1,21 +1,22 @@
 class Solution {
 public:
-    string expand(string s,int i,int j,int n){
-        while(i>=0 && j<n && s[i]==s[j]){
-            i--,j++;
+    string expand(int i,int j,string& s){
+        while(i>=0 && j<s.size() && s[i]==s[j]){
+            i--;
+            j++;
         }
         return s.substr(i+1,j-i-1);
     }
     string longestPalindrome(string s) {
-        int n = s.size(),count = 0;
-        string even,odd,ans="";
+        string ans = "";
+        int n = s.size();
         for(int i=0;i<n;i++){
-            even = expand(s,i,i,n);
-            odd = expand(s,i,i+1,n);
-            if(even.size() > ans.size()){
+            string even = expand(i,i,s);
+            if(ans.size() < even.size()){
                 ans = even;
             }
-            if(odd.size() > ans.size()){
+            string odd = expand(i,i+1,s);
+            if(ans.size() < odd.size()){
                 ans = odd;
             }
         }
