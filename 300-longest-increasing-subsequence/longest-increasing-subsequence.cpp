@@ -2,22 +2,20 @@ class Solution {
 public:
     int n;
     int t[2501][2501];
-
-    int solve(int i,int pre,vector<int>& nums){
+    int solve(int i,int p,vector<int>& nums){
         if(i >= n){
             return 0;
         }
-        if(pre != -1 && t[i][pre] != -1) {
-            return t[i][pre];
+        if(p != -1 && t[i][p] != -1){
+            return t[i][p];
         }
         int take = 0,skip = 0;
-        //take
-        if(pre == -1 || nums[pre] < nums[i]){
+        if(p == -1 || nums[i] > nums[p]){
             take = 1 + solve(i+1,i,nums);
         }
-        skip = solve(i+1,pre,nums);
-        if(pre != -1){
-            t[i][pre] = max(take,skip);
+        skip = solve(i+1,p,nums);
+        if(p != -1){
+            t[i][p] = max(take,skip);
         }
         return max(take,skip);
     }
