@@ -2,11 +2,10 @@ class Solution {
 public:
     int numWaterBottles(int numBottles, int numExchange) {
         if(numBottles < numExchange) return numBottles;
-        int res = numBottles,full = 0,empty = numBottles;
-        while(empty >= numExchange){
-            full = (empty / numExchange);
-            res += full;
-            empty = full + (empty % numExchange);
+        int res = numBottles;
+        while(numBottles >= numExchange){
+            res += numBottles / numExchange;
+            numBottles = (numBottles / numExchange) + (numBottles % numExchange);
         }
         return res;
     }
