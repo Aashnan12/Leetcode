@@ -1,15 +1,31 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n = nums.size();
-        unordered_map<int,int> mp;
+        vector<int> A = nums; // good practice;
+
+        unordered_map<int,vector<int>> map; //for index mapping as index's will be lost after sort.
+        int n = A.size();
         for(int i=0;i<n;i++){
-            int num = target - nums[i];
-            if(mp.find(num) != mp.end()){
-                return {mp[num] , i};
-            }
-            mp[nums[i]] = i;
+            map[A[i]].push_back(i);
         }
-        return {};
+        sort(A.begin(),A.end());
+        int s = 0,e = n-1;
+
+        while(s<=e){
+            int sum = A[s] + A[e];
+            if(sum == target){
+                if(A[s] == A[e]){
+                    return {map[A[s]][0],map[A[e]][1]};
+                }
+                return {map[A[s]][0],map[A[e]][0]};
+            }
+            else if(sum < target){
+                s++;
+            }
+            else{
+                e--;
+            }
+        }
+        return {-1,-1};
     }
 };
