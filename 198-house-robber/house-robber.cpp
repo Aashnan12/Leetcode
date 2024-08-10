@@ -1,19 +1,19 @@
 class Solution {
 public:
-    int t[401];
-    int solve(int idx,vector<int>& nums,int n) {
-        if(idx >= n){
+    int dp[401];
+    int solve(vector<int>& nums,int i,int n){
+        if(i >= n){
             return 0;
         }
-        if(t[idx] != -1){
-            return t[idx];
+        if(dp[i] != -1){
+            return dp[i];
         }
-        int take = solve(idx+2,nums,n) + nums[idx];
-        int skip = solve(idx+1,nums,n) + 0;
-        return t[idx] = max(take,skip);
+        int take = nums[i] + solve(nums,i+2,n);
+        int skip = 0 + solve(nums,i+1,n);
+        return dp[i]=max(take,skip);
     }
     int rob(vector<int>& nums) {
-        memset(t,-1,sizeof(t));
-        return solve(0,nums,nums.size());
+        memset(dp,-1,sizeof(dp));
+        return solve(nums,0,nums.size());
     }
 };
