@@ -1,24 +1,23 @@
 class Solution {
 public:
-    int t[1001];
-    int solve(int idx,vector<int>& nums,int n) {
-        if(idx >= n){
+    int dp[1001];
+    int solve(vector<int>& nums,int i,int n){
+        if(i >= n){
             return 0;
         }
-        if(t[idx] != -1){
-            return t[idx];
+        if(dp[i] != -1){
+            return dp[i];
         }
-        int take = solve(idx+2,nums,n) + nums[idx];
-        int skip = solve(idx+1,nums,n) + 0;
-        return t[idx] = max(take,skip);
+        int take = nums[i] + solve(nums,i+2,n);
+        int skip = 0 + solve(nums,i+1,n);
+        return dp[i]=max(take,skip);
     }
     int rob(vector<int>& nums) {
-        int n = nums.size();
-        if(n==1) return nums[0];
-        memset(t,-1,sizeof(t));
-        int possibility1 = solve(0,nums,n-1);
-        memset(t,-1,sizeof(t));
-        int possibility2 = solve(1,nums,n);
-        return max(possibility1,possibility2);
+        if(nums.size() == 1) return nums[0];
+        memset(dp,-1,sizeof(dp));
+        int op1 = solve(nums,0,nums.size()-1);
+        memset(dp,-1,sizeof(dp));
+        int op2 = solve(nums,1,nums.size());
+        return max(op1,op2);
     }
 };
