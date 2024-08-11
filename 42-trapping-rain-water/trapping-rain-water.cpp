@@ -1,24 +1,25 @@
 class Solution {
 public:
-    int trap(vector<int>& arr) {
-        int n = arr.size();
-        vector<int> prefix(n,0);
-        vector<int> suffix(n,0);
-        int maxi = INT_MIN;
+    int trap(vector<int>& height) {
+        int n = height.size();
+        vector<int> LeftMax(n,0);
+        vector<int> RightMax(n,0);
+        
+        LeftMax[0] = height[0];
+        for(int i=1;i<n;i++){
+            LeftMax[i] = max(LeftMax[i-1],height[i]);
+        }
+
+        RightMax[n-1] = height[n-1];
+        for(int i=n-2;i>=0;i--){
+            RightMax[i] = max(RightMax[i+1],height[i]);
+        }
+
+        int res = 0;
+
         for(int i=0;i<n;i++){
-            maxi = max(maxi,arr[i]);
-            prefix[i] = maxi;
+            res += min(LeftMax[i],RightMax[i]) - height[i];
         }
-        maxi = INT_MIN;
-        for(int i=n-1;i>=0;i--){
-            maxi = max(maxi,arr[i]);
-            suffix[i] = maxi;
-        }
-        int maxwater = 0;
-        for(int i=0;i<n;i++){
-            maxwater += min(prefix[i],suffix[i]) - arr[i];
-            cout<<maxwater<<" ";
-        }
-        return maxwater;
+        return res;
     }
 };
