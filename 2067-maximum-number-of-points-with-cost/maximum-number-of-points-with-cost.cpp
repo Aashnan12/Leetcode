@@ -1,27 +1,32 @@
 class Solution {
 public:
-    long long maxPoints(vector<vector<int>>& P) {
-        long long m = P.size(), n = P[0].size();
-        vector<long long> pre(n);
-        for (int i = 0; i < n; ++i) pre[i] = P[0][i];
-        for (int i = 0; i < m - 1; ++i){
-            vector<long long> lft(n, 0), rgt(n, 0), cur(n, 0);
-            lft[0] = pre[0];
-            rgt[n - 1] = pre[n - 1];
-            for (int j = 1; j < n; ++j){
-                lft[j] = max(lft[j - 1] - 1, pre[j]);
-            }
-            for (int j = n - 2; j >= 0; --j){
-                rgt[j] = max(rgt[j + 1] - 1, pre[j]);
-            }
-            for (int j = 0; j < n; ++j){
-                cur[j] = P[i + 1][j] + max(lft[j], rgt[j]);
-            }
-            pre = cur;
+    long long maxPoints(vector<vector<int>>& points) {
+        int m = points.size();
+        int n = points[0].size();
+        vector<long long> prev(n);
+
+        for(int i=0;i<n;i++){
+            prev[i] = points[0][i];
         }
-        long long ans = 0;
-        for (int i = 0; i < n; ++i)
-            ans = max(ans, pre[i]);
-        return ans;
+
+        for(int i=0;i<m-1;i++){
+            vector<long long> right(n,0), left(n,0) , curr(n,0);
+
+            left[0] = prev[0];
+            right[n-1] = prev[n-1];
+
+            for(int j=1;j<n;j++){
+                left[j] = max(left[j-1]-1,prev[j]);
+            }
+            for(int j=n-2;j>=0;j--){
+                right[j] = max(right[j+1]-1,prev[j]);
+            }
+            for(int j=0;j<n;j++){
+                curr[j] = points[i+1][j] + max(left[j],right[j]);
+            }
+            prev = curr;
+        }
+
+        return *max_element(prev.begin(),prev.end());
     }
 };
