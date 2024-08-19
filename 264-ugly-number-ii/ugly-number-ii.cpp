@@ -1,15 +1,15 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        vector<int> ans(n+1,0);
-        ans[0] = 1;
-        int x=0,y=0,z=0;
+        int x = 0, y = 0, z = 0;
+        vector<int> res(n+1,0);
+        res[0] = 1;
         for(int i=1;i<n;i++){
-            ans[i] = min(ans[x]*2,min(ans[y]*3,ans[z]*5));
-            if(ans[i] == ans[x]*2) x++;
-            if(ans[i] == ans[y]*3) y++;
-            if(ans[i] == ans[z]*5) z++;
+            res[i] = min(res[x]*2 , min(res[y]*3, res[z]*5));
+            if(res[i] == res[x]*2) x++;
+            if(res[i] == res[y]*3) y++;
+            if(res[i] == res[z]*5) z++;
         }
-        return ans[n-1];
+        return res[n-1];
     }
 };
