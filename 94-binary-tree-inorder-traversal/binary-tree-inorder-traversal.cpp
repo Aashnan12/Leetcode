@@ -16,7 +16,7 @@ public:
         stack<bool> vis;
 
         vector<int> res;
-        if(!root) return res;
+        if(root == NULL) return res;
 
         s.push(root);
         vis.push(false);
