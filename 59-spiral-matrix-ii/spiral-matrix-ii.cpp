@@ -1,43 +1,37 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> spiral;
-        spiral.resize(n,vector<int>(n));
-
-        int startrow = 0;
-        int startcol = 0;
-        int endcol = n-1;
-        int endrow = n-1;
-
         int size = n*n;
-        int count = 1;
+        int num = 1;
+        vector<vector<int>> arr;
+        arr.resize(n,vector<int>(n));
+        int sr = 0;
+        int er = n-1;
+        int sc = 0;
+        int ec = n-1;
 
-        while(count <= size){
-            for(int i=startcol;i<=endcol && count<=size;i++){
-                spiral[startrow][i] = count;
-                count++;
+        while(num <= size){
+            for(int i = sc ; num <= size && i <= ec ; i++){
+                arr[sr][i] = num;
+                num++;
             }
-            startrow++;
-            
-            for(int i=startrow;i<=endrow && count<=size;i++){
-                spiral[i][endcol] = count;
-                count++;
+            sr++;
+            for(int i = sr ; num <= size && i <= er ; i++){
+                arr[i][ec] = num;
+                num++;
             }
-            endcol--;
-
-            for(int i=endcol;i>=startcol && count<=size;i--){
-                spiral[endrow][i] = count;
-                count++;
+            ec--;
+            for(int i = ec; num <= size && i >= sc ; i--){
+                arr[er][i] = num;
+                num++;
             }
-            endrow--;
-
-            for(int i=endrow;i>=startrow && count<=size;i--){
-                spiral[i][startcol] = count;
-                count++;
+            er--;
+            for(int i = er ; num <= size && i >= sr ; i--){
+                arr[i][sc] = num;
+                num++;
             }
-            startcol++;
-
+            sc++;
         }
-        return spiral;
+        return arr;
     }
 };
