@@ -1,32 +1,37 @@
 class Solution {
 public:
-    int compress(vector<char>& s) {
-        char prev = s[0];
-        int index=0,count=1,start;
-        for(int i=1;i<s.size();i++){
-            if(s[i] == prev)count++;
+    int compress(vector<char>& chars) {
+        char prev = chars[0];
+        int index = 0,count = 1;
+        for(int i=1;i<chars.size();i++){
+            if(chars[i] == prev){
+                count++;
+            }
             else{
-                s[index++] = prev;
+                chars[index++] = prev;
                 if(count > 1){
-                    start = index;
+                    int start = index;
                     while(count){
-                        s[index++] = (count%10) + '0';
+                        int d = count%10;
+                        chars[index++] = d + '0';
                         count = count/10;
                     }
-                    reverse(s.begin()+start, s.begin() + index);
+                    reverse(chars.begin() + start,chars.begin() + index);
                 }
-                prev = s[i];
-                count=1;
+                prev = chars[i];
+                count = 1;
             }
         }
-        s[index++] = prev;
+
+        chars[index++] = prev;
         if(count > 1){
-            start = index;
+            int start = index;
             while(count){
-                s[index++] = (count%10) + '0';
+                int d = count%10;
+                chars[index++] = d + '0';
                 count = count/10;
             }
-            reverse(s.begin()+start, s.begin() + index);
+            reverse(chars.begin() + start,chars.begin() + index);
         }
         return index;
     }
