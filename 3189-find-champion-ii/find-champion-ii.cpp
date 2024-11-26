@@ -1,11 +1,10 @@
 class Solution {
 public:
     int findChampion(int n, vector<vector<int>>& edges) {
-        vector<int> arr(n+1,0);
+        vector<int> arr(n,0);
+        
         for(auto edge : edges){
-            int a = edge[0];
-            int b = edge[1];
-            arr[b]++;
+            arr[edge[1]]++;
         }
         int ans = 0,index = INT_MIN;
         for(int i=0;i<n;i++){
