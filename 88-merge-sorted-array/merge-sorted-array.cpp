@@ -1,48 +1,25 @@
 class Solution {
 public:
-    void merge(vector<int>& A, int m, vector<int>& B, int n) {
-        for(int i=0;i<n;i++){
-            A[i+m] = B[i];
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int len = m + n;
+
+        while(n > 0 && m > 0){
+            if(nums1[m-1] >= nums2[n-1]){
+                nums1[len-1] = nums1[m-1];
+                m--;
+            }
+            else{
+                nums1[len-1] = nums2[n-1];
+                n--;
+            }
+            len--;
         }
 
-        int len = m + n;
-        int gap = len/2 + len%2;
-        while(gap > 0){
-            int i = 0, j = gap;
-            while(j<len){
-                if(A[i] > A[j]){
-                    swap(A[i],A[j]);
-                }
-                i++;
-                j++;
-            }
-            gap = gap<=1 ? 0 : (gap/2) + (gap%2);
+        while(n > 0){
+            nums1[len-1] = nums2[n-1];
+            len--;
+            n--;
         }
+
     }
 };
-
-
-
-
-// class Solution {
-// public:
-//     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-//         int i = m-1 , j = 0;
-
-//         while(i>=0 && j<n){
-//             if(nums1[i] > nums2[j]){
-//                 swap(nums1[i--],nums2[j++]);
-//             }
-//             else{
-//                 break;
-//             }
-//         }
-
-//         sort(nums1.begin(),nums1.begin()+m);
-//         sort(nums2.begin(),nums2.end());
-
-//         for(int i=0;i<n;i++){
-//             nums1[i+m] = nums2[i];
-//         }
-//     }
-// };
